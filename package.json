@@ -1,5 +1,5 @@
 {
-  "name": "watson-html5-speech-to-text",
+  "name": "watson-html5-speech-recognition",
   "version": "0.6.0",
   "description": "Watson HTML5 Speech to Text",
   "main": "index.js",
@@ -14,7 +14,9 @@
     "watson",
     "speech-to-text",
     "speech",
-    "text"
+    "text",
+    "voice",
+    "recognition"
   ],
   "author": "Carmine DiMascio <cdimascio@gmail.com> (https://github.com/cdimascio)",
   "license": "Apache-2.0",
