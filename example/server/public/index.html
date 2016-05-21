@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Watson Speech to Text client example</title>
+</head>
+<body>
+
+<section>
+    <h2>Press the 'mic' button and speak</h2>
+    <button id="button">mic</button>
+    <p id="recognizedText"></p>
+</section>
+
+<script src="speech.js"></script>
+<h3>Code for this demo:</h3>
+
+<pre><code><script style="display: block;">
+    var speech = SpeechToText;
+    var activeSTT;
+
+    function stopListening() {
+        if (activeSTT) {
+            activeSTT.stop();
+            activeSTT = null;
+        }
+    }
+    function listen() {
+        speech.listen({
+            onStart: function() {
+                console.log('starting');
+            },
+            onResult: function(e) {
+                console.log(e.text);
+                document.getElementById("recognizedText").innerHTML = e.text;
+                if (e.isFinal) {
+                    stopListening();
+                }
+            },
+            onError: function(e) {
+                console.log('error', e);
+            },
+            onEnd: function(e) {
+                console.log('end', e);
+                stopListening();
+            }
+        });
+    }
+
+    document.querySelector('#button').onclick = function () {
+        if (speech.isSupported) {
+            listen();
+        } else {
+            alert('speech not supported by this browser');
+        }
+
+    };
+
+</script></code></pre>
+
+</body>
+</html>

@@ -7,12 +7,17 @@ exports.WatsonSpeechToTextAdaptor = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _isomorphicFetch = require('isomorphic-fetch');
+
+var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
 var _microphone = require('../microphone');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var watsonSpeechRecognizer = require('watson-speech/speech-to-text/recognize-microphone');
-
 var mic = new _microphone.Microphone();
 
 var WatsonSpeechToTextAdaptor = exports.WatsonSpeechToTextAdaptor = function () {
@@ -93,7 +98,7 @@ var WatsonSpeechToTextAdaptor = exports.WatsonSpeechToTextAdaptor = function () 
   }, {
     key: '_requestToken',
     value: function _requestToken() {
-      return fetch('/api/speech-to-text/token').then(function (response) {
+      return (0, _isomorphicFetch2.default)('/api/speech-to-text/token').then(function (response) {
         console.log('got response');
         return response.text();
       });
