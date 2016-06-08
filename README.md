@@ -16,12 +16,13 @@ watson-html5-speech-recognition use Web Speech API when present and Watson Speec
 Currently, the following are supported:
 
 - Webkit speech recognition
-	- Chrome
-	- Opera
+	- Chrome (33)
+	- FireFox (>=44)
 	
 - Watson Speech to Text
 	- Microsoft Edge
-	- Firefox
+	- Firefox (<44)
+	- Opera
 
 ## Prequisites
 
