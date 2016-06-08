@@ -17,7 +17,7 @@ Currently, the following are supported:
 
 - Webkit speech recognition
 	- Chrome
-	- Safari
+	- Opera
 	
 - Watson Speech to Text
 	- Microsoft Edge
@@ -37,6 +37,9 @@ npm install watson-html5-speech-recognition
 
 ## Usage
 ```javascript
+var Speech = require('watson-html5-speech-recognition');
+var speech = new Speech.SpeechToText();
+
 speech.listen({
     onStart: function() {
         console.log('starting');
@@ -53,6 +56,20 @@ speech.listen({
 });
 ```
 
+## Customized Usage
+If Watson speech services are engaged, the watson-html5-speech-recognition request a token from the server then communicates via websocket. 
+
+By default, watson-html5-speech-recognition assumes the token endpoint exists at `/api/speech-to-text/token`. If you alter the location of that endpoint, you must supply the new location via a configuration parameter upon instantiation. Like so...
+
+```javascript
+var Speech = require('watson-html5-speech-recognition');
+var speech = new Speech.SpeechToText({
+  watsonTokenUrl: `/path/to/my/speech-to-text/token`
+});
+```
+
+**NOTE:** The example server uses the `watson-developer-cloud` npm package to configure the token endpoint (see `example/server/stt-token.js`).
+
 ## Example
 The example contains a simple web front end, along with a backend web socket server that communicates with the Watson Speech To Text service
 
@@ -66,7 +83,7 @@ git clone https://github.com/cdimascio/watson-html5-speech-recognition
 Navigate to the example root:
 
 ```shell
-cd examples
+cd example/server
 ```
 
 Install dependencies:
@@ -82,6 +99,10 @@ npm compile
 ```
 
 ### Run the example:
+
+First, be sure to complete all steps in the section above, "Setup the example"
+
+Then,
 
 Open `stt-token.js` to line 10 
 

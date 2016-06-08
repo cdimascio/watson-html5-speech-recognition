@@ -16,11 +16,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var noOp = function noOp() {};
 
 var SpeechToText = exports.SpeechToText = function () {
-  function SpeechToText() {
+  function SpeechToText(conf) {
     _classCallCheck(this, SpeechToText);
 
     this.webkitSpeechAdaptor = new _webkitSpeechToText.WebKitSpeechToTextAdaptor();
-    this.watsonSpeechAdaptor = new _watsonSpeechToText.WatsonSpeechToTextAdaptor();
+    this.watsonSpeechAdaptor = new _watsonSpeechToText.WatsonSpeechToTextAdaptor(conf);
   }
 
   _createClass(SpeechToText, [{

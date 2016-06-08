@@ -21,9 +21,10 @@ var watsonSpeechRecognizer = require('watson-speech/speech-to-text/recognize-mic
 var mic = new _microphone.Microphone();
 
 var WatsonSpeechToTextAdaptor = exports.WatsonSpeechToTextAdaptor = function () {
-  function WatsonSpeechToTextAdaptor() {
+  function WatsonSpeechToTextAdaptor(conf) {
     _classCallCheck(this, WatsonSpeechToTextAdaptor);
 
+    this.tokenUrl = conf.watsonTokenUrl || '/api/speech-to-text/token';
     this.mic = mic;
   }
 
@@ -98,7 +99,7 @@ var WatsonSpeechToTextAdaptor = exports.WatsonSpeechToTextAdaptor = function () 
   }, {
     key: '_requestToken',
     value: function _requestToken() {
-      return (0, _isomorphicFetch2.default)('/api/speech-to-text/token').then(function (response) {
+      return (0, _isomorphicFetch2.default)(this.tokenUrl).then(function (response) {
         console.log('got response');
         return response.text();
       });

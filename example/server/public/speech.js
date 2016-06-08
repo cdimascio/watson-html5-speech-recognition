@@ -6060,9 +6060,10 @@ var watsonSpeechRecognizer = require('watson-speech/speech-to-text/recognize-mic
 var mic = new _microphone.Microphone();
 
 var WatsonSpeechToTextAdaptor = exports.WatsonSpeechToTextAdaptor = function () {
-  function WatsonSpeechToTextAdaptor() {
+  function WatsonSpeechToTextAdaptor(tokenUrl) {
     _classCallCheck(this, WatsonSpeechToTextAdaptor);
 
+    this._tokenUrl = tokenUrl ? tokenUrl : '/api/speech-to-text/token';
     this.mic = mic;
   }
 
@@ -6137,7 +6138,7 @@ var WatsonSpeechToTextAdaptor = exports.WatsonSpeechToTextAdaptor = function () 
   }, {
     key: '_requestToken',
     value: function _requestToken() {
-      return (0, _isomorphicFetch2.default)('/api/speech-to-text/token').then(function (response) {
+      return (0, _isomorphicFetch2.default)(this._tokenUrl).then(function (response) {
         console.log('got response');
         return response.text();
       });
@@ -6316,11 +6317,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var noOp = function noOp() {};
 
 var SpeechToText = exports.SpeechToText = function () {
-  function SpeechToText() {
+  function SpeechToText(config) {
     _classCallCheck(this, SpeechToText);
 
     this.webkitSpeechAdaptor = new _webkitSpeechToText.WebKitSpeechToTextAdaptor();
-    this.watsonSpeechAdaptor = new _watsonSpeechToText.WatsonSpeechToTextAdaptor();
+    this.watsonSpeechAdaptor = new _watsonSpeechToText.WatsonSpeechToTextAdaptor(config.watsonTokenUrl);
   }
 
   _createClass(SpeechToText, [{
@@ -6369,7 +6370,6 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia 
 var Microphone = exports.Microphone = function () {
   function Microphone() {
     _classCallCheck(this, Microphone);
-    console.log('microphone init' );
   }
 
   _createClass(Microphone, [{
@@ -7453,7 +7453,7 @@ module.exports={
   "_args": [
     [
       "websocket@~1.0.22",
-      "/Users/dimascio/git/cognitive-ads-ui/server/node_modules/watson-developer-cloud"
+      "/Users/dimascio/git/watson-html5-speech-recognition/example/server/node_modules/watson-developer-cloud"
     ]
   ],
   "_from": "websocket@>=1.0.22 <1.1.0",
@@ -7481,13 +7481,14 @@ module.exports={
     "type": "range"
   },
   "_requiredBy": [
-    "/watson-developer-cloud"
+    "/watson-developer-cloud",
+    "/watson-speech"
   ],
   "_resolved": "https://registry.npmjs.org/websocket/-/websocket-1.0.23.tgz",
   "_shasum": "20de8ec4a7126b09465578cd5dbb29a9c296aac6",
   "_shrinkwrap": null,
   "_spec": "websocket@~1.0.22",
-  "_where": "/Users/dimascio/git/cognitive-ads-ui/server/node_modules/watson-developer-cloud",
+  "_where": "/Users/dimascio/git/watson-html5-speech-recognition/example/server/node_modules/watson-developer-cloud",
   "author": {
     "email": "brian@worlize.com",
     "name": "Brian McKelvey",
@@ -8008,7 +8009,9 @@ module.exports={
 'use strict';
 
 var Speech = require('watson-html5-speech-recognition');
-var speech = new Speech.SpeechToText();
+var speech = new Speech.SpeechToText({
+  watsonTokenUrl: '/api/speech-to-text/token'
+});
 window.SpeechToText = speech;
 
 },{"watson-html5-speech-recognition":43}]},{},[57]);
