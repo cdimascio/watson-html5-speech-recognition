@@ -19,42 +19,47 @@
     var speech = SpeechToText;
     var activeSTT;
 
-    function stopListening() {
-        if (activeSTT) {
-            activeSTT.stop();
-            activeSTT = null;
-        }
-    }
     function listen() {
-        speech.listen({
+        activeSTT = speech.listen({
             onStart: function() {
-                console.log('starting');
+                console.log('onStart Speech event');
             },
             onResult: function(e) {
-                console.log(e.text);
+                console.log('onResult Speech event', e.text);
                 document.getElementById("recognizedText").innerHTML = e.text;
                 if (e.isFinal) {
                     stopListening();
                 }
             },
             onError: function(e) {
-                console.log('error', e);
+                console.log('onError Speech event', e);
             },
             onEnd: function(e) {
-                console.log('end', e);
+                console.log('onEnd Speech event', e);
                 stopListening();
             }
         });
     }
 
-    document.querySelector('#button').onclick = function () {
-        if (speech.isSupported) {
+    function startListening() {
+        if (activeSTT) {
+            // do nothing, speech is active
+        } else if (speech.isSupported) {
+            console.log('LISTEN')
             listen();
         } else {
             alert('speech not supported by this browser');
         }
+    }
 
-    };
+    function stopListening() {
+        if (activeSTT) {
+            activeSTT.stop();
+            activeSTT = null;
+        }
+    }
+
+    document.querySelector('#button').onclick = startListening;
 
 </script></code></pre>
 

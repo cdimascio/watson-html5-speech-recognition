@@ -1,6 +1,6 @@
 {
   "name": "watson-html5-speech-recognition",
-  "version": "0.6.6",
+  "version": "0.6.7",
   "description": "Watson HTML5 Speech to Text",
   "main": "dist/index.js",
   "scripts": {

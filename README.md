@@ -96,7 +96,7 @@ npm install
 Build the example:
 
 ```shell
-npm compile
+npm run compile
 ```
 
 ### Run the example:
