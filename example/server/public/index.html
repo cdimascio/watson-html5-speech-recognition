@@ -45,7 +45,6 @@
         if (activeSTT) {
             // do nothing, speech is active
         } else if (speech.isSupported) {
-            console.log('LISTEN')
             listen();
         } else {
             alert('speech not supported by this browser');

@@ -119,6 +119,29 @@ Try it:
 - Click the 'mic' button
 - Speak
 
+## About the example
+The `watson-html5-speech-recognition` library is exposed as a node module. It, thus can be used seamlessly with build tools like webpack, browserify, jspm, etc. 
+
+For the purpose of this example, we use Browserify to generate `speech.js` from `main.js`. Once generated, `speech.js` can be included in your webpage via script tag. See `index.html`.
+
+If you want to further customize `main.js`, you must regenerate `speech.js`. To do so:
+
+- `cd example/server`
+- `npm run compile`
+
+All example files live in `example/server`.
+ 
+UI client files:
+
+- `public/main.js` sets up `watson-html5-speech-recognition` and adds an instance to the global space. 
+- `public/speech.js` is generated from `main.js` by Browserify. (`npm run compile`)
+- `public/index.html` contains application to listen for user input and output it to the screen.
+
+Server files:
+
+- `app.js` creates an express server and exposes a base route for speech to text endpoints
+- `stt-token.js` instantiates watson speech to text and provides an endpoint to request speech to text authorization tokens.
+
 
 ## License
 
